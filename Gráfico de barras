@@ -1,0 +1,12 @@
+library(ggplot2)
+trabajoinfaltil<-read.table("/Users/MariaNathaliaR/Documents/tti.txt")
+trabajoinfaltil
+colnames(trabajoinfaltil)<-c("PobrezaMonetaria","Bucaramanga")
+colnames(trabajoinfaltil)
+names(trabajoinfaltil)
+attach(trabajoinfaltil)
+
+ggplot(data=trabajoinfaltil, aes(x=PobrezaMonetaria,y=Bucaramanga)) + geom_bar(stat="identity",color="PINK")+
+  xlab("Año ")+
+  ylab("Tasa de pobreza")+
+  ggtitle("Histórico Tasa de pobreza monetaria en Bucaramanga/Colombia")
