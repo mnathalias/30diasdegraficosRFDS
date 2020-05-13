@@ -1,0 +1,19 @@
+library(ggplot2)
+
+women<-read.table("/Users/MariaNathaliaR/Desktop/FEMALEPARTICIPATION.txt")
+women
+colnames(women)<-c("Participacion","Años")
+colnames(women)
+names(women)
+attach(women)
+
+
+p<-ggplot(women, aes(x=Participacion, y=Años)) + 
+  geom_line(colour="violet")  + 
+  geom_point( size=2, shape=21, fill="grey", colour="pink") + 
+  theme_light()+ xlab("Años")+
+  ylab("Porcentaje de participación")+
+  ggtitle("Participación de la mujer en el mercado laboral en Colombia (OCDE)")
+p
+
+p + transition_reveal(Participacion)
