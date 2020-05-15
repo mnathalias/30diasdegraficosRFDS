@@ -1,0 +1,23 @@
+library(tidyverse)
+install.packages("dslabs")
+library(dslabs)
+data(gapminder)
+gapminder %>% as_tibble()
+
+filter(gapminder, year%in%c(1962, 2015)) %>%
+  ggplot(aes(fertility, life_expectancy, col = continent)) +
+  geom_point() +
+  facet_grid(continent~year)+
+  theme(text=element_text(family = font),
+        plot.background = element_rect(fill = "white", color=NA), 
+        legend.background = element_rect(fill=backcolor,
+                                         size=0.5, linetype="solid"),
+        plot.title = element_text(size=20, hjust=0,face="bold", color="#FF0099"), 
+        plot.subtitle = element_text(face="italic", size=12, hjust=0), 
+        plot.caption = element_text( face="italic", size=10, hjust = 1), 
+        axis.text.x = element_text(angle = 90, hjust = 1, color=colortext),
+        axis.text.y = element_text(color=colortext), 
+        legend.position = "top")+ 
+  labs(title= "Día 4: Gráfico de Facetas", 
+       subtitle = " Fertilidad y Expectativas de Vida",
+       caption =" Hecho por María Nathalia Ramírez \n @mnathalias")
