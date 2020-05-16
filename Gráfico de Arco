@@ -1,0 +1,44 @@
+# install 'devtools' if you haven't
+install.packages("devtools")
+# load devtools
+library(devtools)
+# then download 'arcdiagram' using 'install_github'
+install_github('gastonstat/arcdiagram')
+library(arcdiagram)
+library(igraph)
+install.packages("randomcoloR")
+library(randomcoloR)
+
+# create a graph with 8 nodes
+star_graph = graph.star(8, mode = "out")
+# add names to nodes
+V(star_graph)$name = paste("node", 1:vcount(star_graph), sep = "-")
+# extract edgelist
+star_edges = get.edgelist(star_graph)
+# plot arc diagram
+arcplot(star_edges, las = 1)
+
+#####
+# create an edgelist
+lab = rbind(c("JArcadio B", "Ursula Iguaran"), c("JArcadio B", "Jose Arcadio"), c("JArcadio B", "Rebeca"),c("JArcadio B", "Amaranta"), c("JArcadio B", "C.Aureliano"),c("Ursula Iguaran", "Jose Arcadio"), c("Ursula Iguaran", "Rebeca"),
+c("Ursula Iguaran", "Amaranta"), c("Ursula Iguaran","C.Aureliano"),c("Rebeca","Jose Arcadio"),c("Jose Arcadio","Pilar T"),c("Pilar T","C.Aureliano"),c("C.Aureliano","Remedios M"),c("C.Aureliano","17Aurelianos"),c("Pilar T","Arcadio"),c("Pilar T","Aureliano J"),c("Arcadio","Santa Sofia"),c("Aureliano J","Carmelita"),c("Santa Sofia","RemediosLABELLA"),c("Santa Sofia","Jose Arcadio II"),c("Santa Sofia","Aureliano II"),c("Arcadio","RemediosLABELLA"),c("Arcadio","Jose Arcadio II"),c("Arcadio","Aureliano II"),c("Fernanda","Aureliano II"),c("Aureliano II,Petra C"),c("Jose Arcadio II","Petra C"),c("Fernanda","Meme"),c("Fernanda,Jose Arcadio II"),c("Fernanda","Amaranta Ursula"),
+c("Aureliano II, Jose Arcadio II"),c("Aureliano II","Amaranta Ursula"),c("Meme","Mauricio Babilonia"),c("Mauricio Babilonia","Aureliano Babilonia"),c("Meme","Aureliano Babilonia"),c("Aureliano Babilonia","Amaranta Ursula"),c("Amaranta Ursula","Gaston"),c("Aureliano Babilonia","Aureliano(Rodrigo)"),c("Amaranta Ursula","Aureliano(Rodrigo)"))
+arcplot(lab)
+arcplot(lab,col.arcs = hsv(runif(10,0.6,0.8),alpha=0.4),lwd.arcs = 2, lty.arcs = 1,
+        lend = 1, ljoin = 2, lmitre = 1, show.nodes = TRUE,
+        pch.nodes = 19, cex.nodes = 1, col.nodes = "#b8e0f2",
+        bg.nodes = "gray80", lwd.nodes = 1, show.labels = TRUE,
+        col.labels = hsv(0, 0, 0.2, 0.25), cex.labels = 0.6, las = 2,font = 0.5, line = 0, outer = FALSE,main="Personajes Cien años de Soledad,",sub="Hecho por: María Nathalia Ramírez",fon.sub=3,cex.sub=0.5)
+
+
+
+
+#PLAY TIME
+# make graph from edgelist
+glab = graph.edgelist(lab, directed = TRUE)
+# plot graph
+plot(glab)
+# degrees
+lab_degree = degree(glab)
+c
+
