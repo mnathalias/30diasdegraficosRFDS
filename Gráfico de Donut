@@ -1,0 +1,81 @@
+# +++++++++++++++++++++++++++++++
+library(ggplot2)
+library(ggpubr)
+
+df <- data.frame(
+  group = c("Muy alto IDH", "Alto IDH", "Medio IDH","Bajo IDH"),
+  value = c(32.8, 28.5, 19.5,19.1))
+
+head(df)
+
+
+# Basic pie charts
+# ++++++++++++++++++++++++++++++++
+
+ggdonutchart(df, "value", label = "group")
+
+# Change color
+# ++++++++++++++++++++++++++++++++
+
+# Change fill color by group
+# set line color to white
+# Use custom color palette
+ggdonutchart(df, "value", label = "group",
+             fill = "group", color = "white",
+             palette = c("#00AFBB", "#E7B800", "#FC4E07","666FFF") )
+
+
+# Change label
+# ++++++++++++++++++++++++++++++++
+
+# Show group names and value as labels
+labs <- paste0(df$group, " (", df$value, "%)")
+ggdonutchart(df, "value", label = labs,
+             fill = "group", color = "white",
+             palette = c("#00AFBB", "#E7B800", "#FC4E07","666FFF"))
+
+# Change the position and font color of labels
+ggdonutchart(df, "value", label = labs,
+             lab.pos = "in", lab.font = "white",
+             fill = "group", color = "white",
+             palette = c("#00AFBB", "#E7B800", "#FC4E07","666FFF")
+###############################################################################
+
+ds <- data.frame(
+  group = c("Ingresos bajos", "Ingresos Medio bajos", "Ingresos Medio Alto","Ingresos Altos"),
+  value = c(14.22, 21.5, 27.5,36.6))
+
+head(ds)
+
+
+# Basic pie charts
+# ++++++++++++++++++++++++++++++++
+
+ggdonutchart(ds, "value", label = "group")
+
+# Change color
+# ++++++++++++++++++++++++++++++++
+
+# Change fill color by group
+# set line color to white
+# Use custom color palette
+ggdonutchart(ds, "value", label = "group",
+             fill = "group", color = "white",
+             palette = c("#00AFBB", "#E7B800", "#FC4E07","666FFF") )
+
+
+# Change label
+# ++++++++++++++++++++++++++++++++
+
+# Show group names and value as labels
+labs <- paste0(ds$group, " (", ds$value, "%)")
+ggdonutchart(ds, "value", label = labs,
+             fill = "group", color = "white",
+             palette = c("#00AFBB", "#E7B800", "#FC4E07","666FFF"))
+
+# Change the position and font color of labels
+ggdonutchart(ds, "value", label = labs,lab.pos = "in", lab.font = "white",
+             fill = "group", color = "white",
+             palette = c("#00AFBB", "#E7B800", "#FC4E07","666FFF")
+
+             
