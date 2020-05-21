@@ -1,0 +1,117 @@
+# dia 10 paletas de colores
+library(cowplot)
+library(ggplot2)
+library(magick)
+#Eligo la fuente que quiero utilizar
+library(extrafont) # la primera vez ejecutar font_import()
+loadfonts()
+font<- "Palatino" #Fuente que voy a utlizar
+
+magick::image_read("/Users/MariaNathaliaR/Desktop/picture1.png")
+
+data<-data.frame(x=c("a", "b", "c", "a", "b", "c"),
+                 y=c("A", "A", "A", "B", "B", "B"))
+
+pic1<-ggdraw() + 
+  draw_image("/Users/MariaNathaliaR/Desktop/picture1.png") 
+paleta1<- c("#66FF33","#336600","#66FF00","#669966","#663300","#996633")
+data1<- data.frame(data,paleta1)
+data1$paleta1<-factor(data1$paleta1, levels=paleta1)
+plot1<-data1%>% 
+  ggplot(aes(x = x, y = y, fill = factor(paleta1),label=paleta1) ) + 
+  geom_tile()+geom_text(family=font)+
+  scale_fill_manual(values = paleta1)+theme_bw()+
+  theme(text=element_text(family = font),
+        panel.border = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none")+
+  labs(x="", y ="")+
+  coord_fixed(ratio=1)
+picture1<-plot_grid(pic1, plot1, rel_widths = c(0.55, 0.65))
+
+picture1
+
+pic2<-ggdraw() + 
+  draw_image("/Users/MariaNathaliaR/Desktop/picture2.png") 
+paleta2<- c("#99FF00","#00FF00","#99FF33","#99FFCC", "#CCFFCC", "#996666")
+data2<- data.frame(data,paleta2)
+
+data2<- data.frame(data,paleta2)
+data2$paleta2<-factor(data2$paleta2, levels=paleta2)
+plot2<-data2%>% 
+  ggplot(aes(x = x, y = y, fill = factor(paleta2),label=paleta2) ) + 
+  geom_tile()+geom_text(family=font)+
+  scale_fill_manual(values = paleta2)+theme_bw()+
+  theme(text=element_text(family = font),
+        panel.border = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none")+
+  labs(x="", y ="")+
+  coord_fixed(ratio=1)
+picture2<-plot_grid(pic2, plot2, rel_widths = c(0.55, 0.65))
+picture2
+
+pic3<-ggdraw() + 
+  draw_image("/Users/MariaNathaliaR/Desktop/picture3.png") 
+paleta3<-c("#993300","#663333","#009900", "#339933","#FFCC33","#CC6633")
+data3<- data.frame(data,paleta3)
+
+data3<- data.frame(data,paleta3)
+data3$paleta3<-factor(data3$paleta3, levels=paleta3)
+plot3<-data3%>% 
+  ggplot(aes(x = x, y = y, fill = factor(paleta3),label=paleta3) ) + 
+  geom_tile()+geom_text(family=font)+
+  scale_fill_manual(values = paleta3)+theme_bw()+
+  theme(text=element_text(family = font),
+        panel.border = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none")+
+  labs(x="", y ="")+
+  coord_fixed(ratio=1)
+picture3<-plot_grid(pic3, plot3, rel_widths = c(0.55, 0.65))
+picture3
+
+pic4<-ggdraw() + 
+  draw_image("/Users/MariaNathaliaR/Desktop/picture4.png") 
+paleta4<-c("#33CC00","#CCFFFF","#009966","#33CC99" ,"#CCFFCC","#9DC10C")
+data4<- data.frame(data,paleta4)
+
+data4<- data.frame(data,paleta4)
+data4$paleta4<-factor(data4$paleta4, levels=paleta4)
+plot4<-data4%>% 
+  ggplot(aes(x = x, y = y, fill = factor(paleta4),label=paleta4) ) + 
+  geom_tile()+geom_text(family=font)+
+  scale_fill_manual(values = paleta4)+theme_bw()+
+  theme(text=element_text(family = font),
+        panel.border = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none")+
+  labs(x="", y ="")+
+  coord_fixed(ratio=1)
+picture4<-plot_grid(pic4, plot4, rel_widths = c(0.55, 0.5))
+picture4
+
+title <- ggdraw() + draw_label("Colores de la Colombia Rural", size=30,fontface="bold", color="#99FF99", fontfamily = font, hjust=1.0)
+
+caption <- ggdraw() + draw_label("@mnathalias\n #30díasdegráficos\n fotos tomadas de Google", fontface="bold", size=12, hjust = -.2, fontfamily = font)
+
+row1<-plot_grid(picture1, picture2, nrow=1) 
+row2<-plot_grid(picture3, picture4, nrow=1)
+plot_grid(title, row1, row2, caption, nrow=5, rel_heights = c(0.10, 0.10, 0.10, 0.10, 0.10))
+ggsave("/Users/MariaNathaliaR/Desktop/10_colores.png", height = 10, width=12)
