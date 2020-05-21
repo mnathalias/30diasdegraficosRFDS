@@ -1,0 +1,12 @@
+library(ggplot2)
+install.packages("ggthemes")
+library(ggthemes)
+library(extrafont)
+library(plyr)
+library(scales)
+colnames(jornal)
+
+p4 <-ggplot("jornal")+geom_bar(aes(y ="Preciomedio", x = "Año", fill ="Tipodejornal"), data =jornal,stat="identity"))
+p4
+
+p4<-ggplot(jornal)
