@@ -1,0 +1,30 @@
+library(extrafont) # la primera vez ejecutar font_import()
+loadfonts()
+font<- "Palatino" #Fuente que voy a utlizar
+
+
+install.packages("treemapify")
+library(ggplot2)
+library(treemapify)
+G20
+ggplot(G20, aes(area = gdp_mil_usd, fill = hdi)) +
+  geom_treemap()
+ggplot(G20, aes(area = gdp_mil_usd, fill = hdi, label = country)) +
+  geom_treemap() +
+  geom_treemap_text(fontface = "italic", colour = "white", place = "centre",
+                    grow = TRUE)
+
+p<-ggplot(G20, aes(area = gdp_mil_usd, fill = region, label = country, subgroup = region)) +
+  geom_treemap() +
+  geom_treemap_text(grow = T, reflow = T, colour = "white",family="Palatino") +
+  facet_wrap( ~ hemisphere) +
+  scale_fill_brewer(palette = "Set1") +
+  theme(legend.position = "bottom") +
+  labs(
+    title = "Mayores economías del G-20 por hemisferio",subtitle = "Día 13: Dendograma",
+    caption = " El área representa el PIB del país en proporción a los demás países de ese hemisferio\n @mnathalias\n Datos de Treemapify documentation",
+    fill = "Region",family="Palatino")
+p
+
+geom_treemap_text(family = "Roboto Condensed", colour = "white", place = "centre",
+                  grow = TRUE)
