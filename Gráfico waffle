@@ -1,0 +1,23 @@
+#Defino paleta de colores
+palette30<- c("#FD7FC4",  "#FF8A33", "#EC4176", "#A13770" , "#33DDFF", "#FFEC33", "#5564eb", "#4c2882")
+#Eligo la fuente que quiero utilizar
+library(extrafont) # la primera vez ejecutar font_import()
+loadfonts()
+font<- "Palatino" #Fuente que voy a utlizar
+
+
+
+library(waffle)
+
+parts <- c('APPLE MUSIC y SPOTIFY' = 22, 'RHAPSODY' = 24,'DEEZER'=30,'TIDAL'=15,'AMAZON MUSIC'=9)
+p <- waffle(parts, rows = 10, colors = c("pink", "grey70","violet","yellow","#33DDFF"))
+p+
+  labs(title= " Cátalogo de los servicios de música en Streaming", 
+       subtitle = "Día 16: Gráfico Waffle", 
+       x="",
+       y="",
+       caption = " @mnathalias \n #30díasdegráficos \n Fuente: Deezer" )+theme_bw()
+ggsave("16_waffle.png", height = 5.89, width=8.58)
+
+
+
