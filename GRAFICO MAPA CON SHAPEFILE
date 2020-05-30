@@ -1,0 +1,41 @@
+# Carga de paquetes
+library(ggplot2)
+library(sf)
+library(cartogram)
+library(magick)
+library(purrr)
+library(ggmap)
+library(tidyverse)
+
+install.packages("rgdal", dependencies = TRUE)
+library(rgdal) # para importar archivos shapefiles
+install.packages("broom")
+library(broom) # Para transformar los archivos shapefiles 
+
+setwd("/Users/MariaNathaliaR/Downloads/depto")
+file.exists('depto.shp')
+
+pro <- st_read('depto.shp')
+View(pro)
+plot(pro)
+head(pro)
+class(pro)
+print(pro)
+pro$data
+plot(st_geometry(pro))
+
+hi<-ggplot(pro) +
+  geom_sf(aes(fill = factor(AREA)))
+
+# Lectura de datos sobre NBI
+NBI <- read.csv("/Users/MariaNathaliaR/Desktop/NBIDEPTO.csv", header=TRUE, sep=";")
+NBI
+class(NBI)
+
+pro <- left_join(pro, NBI)
+head(pro)
+ggplot(pro) + geom_sf(aes(fill = factor(NBI)))+labs(x="", y="",fill="% población en NBI")+ 
+  labs(title= "Necesidades Básicas Insatisfechas (NBI) ", 
+       subtitle = " Día 18: mapas ",
+       caption ="Fuente:DANE \n @mnathalias")+theme_gray()
+ggsave("/Users/MariaNathaliaR/Desktop/NBICOLOMBIA.png")
