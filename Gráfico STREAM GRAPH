@@ -1,0 +1,56 @@
+#Defino paleta de colores
+palette30<- c("#FD7FC4",  "#FF8A33", "#EC4176", "#A13770" , "#33DDFF", "#FFEC33", "#5564eb", "#4c2882")
+#Eligo la fuente que quiero utilizar
+library(extrafont) # la primera vez ejecutar font_import()
+loadfonts()
+font<- "Trebuchet MS" #Fuente que voy a utlizar
+
+
+
+# Cargar librerías --------------------------------------------------------
+
+library(tidyverse)
+library(ggTimeSeries)
+
+datos de https://trends.google.es/trends/explore?date=today%205-y&geo=CO&q=Linea%20de%20pobreza,pobreza%20monetaria,%2Fm%2F0cp1329,%2Fm%2F020d7_,%2Fg%2F121sxhtz
+
+# Cargar y procesar datos -------------------------------------------------
+
+
+datos2 <- read_csv("/Users/MariaNathaliaR/Downloads/multiTimeline (1).csv", skip = 2) %>% 
+  mutate_if(is.character, parse_number) %>% 
+  pivot_longer(-1, names_to = c("termino", "pais"), values_to = "valor", names_pattern = "(.*): (.*)")
+head(datos2)
+view(datos2)
+# Visualización -----------------------------------------------------------
+
+
+p <- ggplot(datos2, aes(x = Semana, y = valor, fill = termino)) +
+  stat_steamgraph(alpha = .75) +
+  scale_x_date(date_breaks = "5 years", date_labels = "%b %Y", 
+               limits = c(as.Date("2015-05-31"), as.Date("2020-05-30")))+
+  scale_fill_manual(values = c("#f0bf4b",
+                               "#66829a",
+                               "#009377",
+                               "#f94144",
+                               "#f4a6ff")) +
+  guides(fill = guide_legend(title.position = "top")) +
+  labs(fill= "Término de búsqueda", x="", y="",
+       title = "Búsquedas en Google Colombia temas de Pobreza",subtitle = "En los últimos 5 años",
+       caption= "@mnathalias #30díasdeGráficos") +
+  theme(legend.position="bottom",
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        plot.background = element_rect(fill= "white"),
+        panel.background = element_rect(fill = "white"),
+        plot.title = element_text(size=20, hjust = 0.5, vjust = 0.5, colour="#01c0d6"),
+        legend.title.align = 0.5,
+        panel.grid.major.x = element_line(linetype = "dashed", colour="grey33"),
+        panel.grid = element_blank(),
+        plot.caption = element_text(hjust = 1),
+        plot.caption.position = "plot")+theme_light()+ theme(text=element_text(family = font))
+
+p
+ggsave("/Users/MariaNathaliaR/Downloads/stream.png")
+
